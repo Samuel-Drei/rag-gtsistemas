@@ -1,62 +1,62 @@
 [
   {
     "question": "Como cadastrar um super usuário no GT Sistemas?",
-    "answer": "Acesse a página de cadastro e preencha o nome e e-mail conforme definido no arquivo .env do sistema. O super usuário tem acesso a todas as empresas cadastradas e pode gerenciar planos, usuários e emissões de NF."
+    "answer": "Para cadastrar um super usuário, acesse a página de login e insira o nome 'super' e um e-mail igual ao nome de usuário, conforme definido nas configurações do sistema. O super usuário tem acesso a todas as empresas cadastradas e pode gerenciar planos, usuários e emissões fiscais."
   },
   {
     "question": "Quais tipos de documento fiscal o GT Sistemas suporta?",
-    "answer": "O GT Sistemas suporta NF-e, NFC-e, CT-e, MDF-e e NFS-e. Também é possível usar a API para transmissão, cancelamento e carta de correção sem utilizar a interface do sistema."
+    "answer": "O GT Sistemas suporta NF-e, NFC-e e CT-e. É possível visualizar, transmitir, imprimir, cancelar e baixar XMLs de cada documento diretamente pelo sistema."
   },
   {
     "question": "Como cancelar uma NF-e já transmitida no GT Sistemas?",
-    "answer": "Na listagem de emissões, localize a NF-e desejada e utilize a opção de cancelamento. O sistema realiza o cancelamento junto à SEFAZ e atualiza o status automaticamente."
+    "answer": "Acesse a listagem de emissões, localize a NF-e transmitida, selecione a opção de cancelamento e confirme. O sistema atualiza o status automaticamente."
   },
   {
     "question": "O PDV do GT Sistemas funciona offline?",
-    "answer": "Sim. O GT Sistemas possui um modo PDV offline que permite registrar vendas sem conexão com a internet. Os dados são sincronizados automaticamente quando a conexão é restabelecida."
+    "answer": "Sim. O PDV foi desenvolvido em Angular com Electron e funciona offline. Quando não há conexão, os dados são armazenados localmente. Quando a conexão é restabelecida, as informações são enviadas automaticamente ao servidor."
   },
   {
-    "question": "Como configurar a impressão automática por categoria de produto no PDV?",
-    "answer": "Nas configurações de impressora do PDV, associe cada categoria de produto (por exemplo, cozinha ou bar) a uma impressora específica. Ao fechar uma comanda, os itens são impressos automaticamente na impressora correta."
+    "question": "Como configurar a impressão automática por impressora no PDV?",
+    "answer": "Nas configurações de impressoras de pedido, registre cada impressora (ex.: cozinha, bar) e selecione quais itens serão impressos por ela. Ao finalizar uma venda ou comanda, os itens são enviados automaticamente para a impressora correta sem abrir janela de diálogo."
   },
   {
     "question": "Como funciona o módulo de comandas e mesas no GT Sistemas?",
-    "answer": "O módulo permite abrir comandas por mesa ou por cliente, adicionar itens, dividir a conta entre diferentes formas de pagamento e encerrar a comanda. Pedidos podem ser impressos automaticamente nas impressoras de cozinha ou bar."
+    "answer": "O módulo permite abrir comandas por mesa ou por cliente. Para abrir, clique em 'mais', insira o telefone do cliente e o número da comanda. No PDV para comandas é possível alternar entre comandas e adicionar itens sem trocar de tela. O app de controle permite que garçons lancem pedidos usando seu código de identificação."
   },
   {
     "question": "Como configurar taxa de entrega por bairro no módulo de delivery?",
-    "answer": "No módulo de delivery, acesse as configurações de bairros e cadastre cada bairro com sua respectiva taxa de entrega. É possível definir um valor mínimo de pedido e configurar frete grátis a partir de um determinado valor."
+    "answer": "No módulo de delivery, acesse o cadastro de bairros, adicione ou edite um bairro e informe o nome, o valor de entrega e ative o status. É possível também configurar valor mínimo de pedido e valor para frete grátis."
   },
   {
     "question": "Como integrar o GT Sistemas com o Mercado Livre?",
-    "answer": "Na área de integrações, acesse o Mercado Livre, realize a autenticação OAuth com sua conta e sincronize os produtos. O sistema permite responder perguntas, gerenciar pedidos e emitir NF-e diretamente a partir dos pedidos do Mercado Livre."
+    "answer": "Acesse a área de desenvolvedores do Mercado Livre e crie uma aplicação para obter o App ID e a chave secreta. Insira essas informações na configuração do Mercado Livre no GT Sistemas com a URL do sistema em HTTPS. Após salvar, o sistema gera o token de acesso. Com a integração ativa, é possível gerenciar produtos, responder perguntas, gerenciar pedidos e emitir NF-e diretamente pelo ERP."
   },
   {
     "question": "Como funciona o módulo Contador no GT Sistemas?",
-    "answer": "O módulo Contador permite que o contador acesse documentos fiscais de múltiplas empresas (NF-e, NFC-e, CT-e) com permissão de visualização. É possível baixar XMLs, visualizar eventos fiscais e filtrar por empresa."
+    "answer": "O módulo Contador permite acessar documentos fiscais de múltiplas empresas vinculadas, com opções de visualização, download de XML e filtro por período. É possível também gerar NF-e e NFC-e e realizar eventos como aprovar, cancelar e corrigir documentos. O contador é cadastrado pelo super admin com um limite de empresas vinculadas."
   },
   {
     "question": "Como configurar mensagens automáticas pós-venda no GT Sistemas?",
-    "answer": "No módulo de CRM e automação, configure mensagens automáticas para pós-venda, aniversário e reativação de clientes inativos. As mensagens podem ser enviadas por WhatsApp ou e-mail conforme o evento configurado."
+    "answer": "No módulo de CRM, acesse as mensagens automáticas e configure o pós-venda definindo o intervalo de dias após a venda para o envio. Também é possível configurar mensagens de aniversário, reativação e pós-agendamento. Os logs registram automaticamente quando uma mensagem é agendada."
   },
   {
     "question": "Como funciona o controle de caixa no módulo financeiro do GT Sistemas?",
-    "answer": "O módulo financeiro exige que o caixa esteja aberto para qualquer movimentação. É possível registrar entradas e saídas, realizar sangria e suprimento, visualizar contas a pagar e a receber, e fechar o caixa ao final do expediente."
+    "answer": "Para abrir o caixa é necessário ter ao menos uma conta cadastrada. Após a abertura, é possível realizar vendas com múltiplas formas de pagamento. Para fechar, insira o valor total por tipo de pagamento e escolha a conta de destino. O histórico de caixas com datas de abertura e fechamento fica disponível para consulta e impressão."
   },
   {
     "question": "Como emitir uma NFS-e (Nota Fiscal de Serviço) no GT Sistemas?",
-    "answer": "O GT Sistemas integra com a API IntegraNOTAS para emissão de NFS-e. Acesse o módulo fiscal, preencha os dados do serviço prestado e transmita. O cancelamento também é realizado pela mesma interface."
+    "answer": "Acesse o menu NFC/NFSe e clique em Nova NFSe. Selecione o cliente e o serviço pré-cadastrado. Após salvar, é possível pré-visualizar em PDF. Para transmitir, clique no botão Transmitir NFSe e aguarde a autorização. Após aprovada, o sistema disponibiliza o PDF e o XML. O cancelamento também é feito pela mesma tela."
   },
   {
     "question": "O GT Sistemas suporta múltiplas empresas? Como o super usuário gerencia?",
-    "answer": "Sim. O super usuário tem acesso a todas as empresas cadastradas, podendo atribuir planos, configurar dados do emitente, visualizar todas as emissões fiscais e gerenciar usuários de cada empresa pelo painel administrativo."
+    "answer": "Sim. O super admin acessa qualquer empresa sem precisar de novo login, podendo realizar cadastros e configurações em cada uma. As novas empresas herdam automaticamente as atribuições definidas pelo super admin. Também é possível visualizar e gerenciar usuários de cada empresa pelo painel."
   },
   {
     "question": "Como cadastrar um novo produto no GT Sistemas?",
-    "answer": "Acesse o menu de Produtos, clique em Novo Produto e preencha os campos obrigatórios como nome, categoria, preço e estoque. É possível também importar produtos em lote por planilha Excel."
+    "answer": "Acesse o menu de Produtos e clique em Novo Produto. A categoria não é obrigatória. Os campos principais são nome, valor de compra e valor de venda. Para emissão fiscal, CFOP deve ser preenchido corretamente. É possível aplicar um padrão de tributação (NCM, CST) para preencher os dados fiscais automaticamente."
   },
   {
     "question": "Como configurar o módulo de e-commerce no GT Sistemas?",
-    "answer": "No módulo de e-commerce, configure o catálogo de produtos, meios de pagamento (Mercado Pago e PIX), frete e cupons de desconto. O sistema gera uma loja online (PWA) acessível ao cliente para pedidos e acompanhamento de status."
+    "answer": "Na configuração do e-commerce, defina o ID da loja (único por empresa), nome, endereço, links de redes sociais, valor de frete grátis e status. O cliente acessa a loja, adiciona itens ao carrinho, informa CPF e finaliza o pagamento via Pix, boleto ou cartão. Os pedidos aparecem no painel com status em tempo real."
   }
 ]

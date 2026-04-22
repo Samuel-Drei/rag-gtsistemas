@@ -33,10 +33,6 @@ class RAGPipeline:
 
     def process_query(self, query: str) -> str:
         search_results = self.retriever.search(query)
-        print(f"✅ Found {len(search_results)} results for query: {query}\n")
-
-        for i, result in enumerate(search_results):
-            print(f"🔍 Result {i+1}: {result}\n")
 
         response = self.response_generator.generate_response(query, search_results)
         return response

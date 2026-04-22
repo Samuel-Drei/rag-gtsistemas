@@ -46,7 +46,7 @@ def main():
 
     if args.command in ["evaluate", "run"]:
         print(f"📊 Evaluating using questions from: {eval_path}")
-        with open(eval_path, "r") as file:
+        with open(eval_path, "r", encoding="utf-8") as file:
             sample_questions = json.load(file)
         pipeline.evaluate(sample_questions)
 

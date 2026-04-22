@@ -62,6 +62,4 @@ class Retriever(BaseRetriever):
             # output jus valid indices
         result_indices = data.get("indices", [])
         valid_indices = [i for i in result_indices if isinstance(i, int) and 0 <= i < len(search_results)]
-
-        print(f"✅ Reranked Indices: {valid_indices}(from {len(search_results)} chunks")
         return [search_results[i] for i in valid_indices[:top_k]]
