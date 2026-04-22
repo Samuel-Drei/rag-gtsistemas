@@ -1,9 +1,12 @@
 import glob
 import json
 import os
+import sys
 from typing import List
 from rag_pipeline import RAGPipeline
 from create_parser import create_parser
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 
 from impl import Datastore, Indexer, Retriever, ResponseGenerator, Evaluator
 
