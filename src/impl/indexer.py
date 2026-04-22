@@ -1,33 +1,40 @@
-import os
+import re
 from typing import List
 from interface.base_datastore import DataItem
 from interface.base_indexer import BaseIndexer
-from docling.document_converter import DocumentConverter
-from docling.chunking import HybridChunker, DocChunk
 
 
 class Indexer(BaseIndexer):
-    def __init__(self):
-        self.converter = DocumentConverter()
-        self.chunker = HybridChunker()
-        # Disable tokenizers parallelism to avoid OOM errors.
-        os.environ["TOKENIZERS_PARALLELISM"] = "false"
-
     def index(self, document_paths: List[str]) -> List[DataItem]:
         items = []
-        for document_path in document_paths:
-            document = self.converter.convert(document_path).document
-            chunks: List[DocChunk] = self.chunker.chunk(document)
-            items.extend(self._items_from_chunks(chunks))
+        for path in document_paths:
+            with open(path, "r", encoding="utf-8") as f:
+                content = f.read()
+            items.extend(self._chunk_markdown(content, path))
         return items
 
-    def _items_from_chunks(self, chunks: List[DocChunk]) -> List[DataItem]:
+    def _chunk_markdown(self, content: str, source_path: str) -> List[DataItem]:
+        current_h1 = ""
+        current_h2 = ""
+        chunks = re.split(r'\n(?=#{1,3} )', content)
         items = []
+
         for i, chunk in enumerate(chunks):
-            content_headings = "## " + ", ".join(chunk.meta.headings)
-            content_text = f"{content_headings}\n{chunk.text}"
-            source = f"{chunk.meta.origin.filename}:{i}"
-            item = DataItem(content=content_text, source=source)
-            items.append(item)
+            chunk = chunk.strip()
+            if not chunk:
+                continue
+
+            if chunk.startswith("# "):
+                current_h1 = chunk.splitlines()[0].lstrip("# ").strip()
+                continue
+
+            if chunk.startswith("## "):
+                current_h2 = chunk.splitlines()[0].lstrip("# ").strip()
+                continue
+
+            if chunk.startswith("### "):
+                context = ", ".join(filter(None, [current_h1, current_h2]))
+                full_text = f"## {context}\n{chunk}" if context else chunk
+                items.append(DataItem(content=full_text, source=f"{source_path}:{i}"))
 
         return items
