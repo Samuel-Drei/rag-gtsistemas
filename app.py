@@ -6,10 +6,9 @@ from main import create_pipeline, get_files_in_directory
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 
-st.set_page_config(page_title="RAG Pipeline v2.0", page_icon="🔍")
+st.set_page_config(page_title="GT Sistemas - Assistente ERP", page_icon="🤖")
 
-st.title("🔍 RAG Pipeline v2.0")
-st.info("88% accuracy")
+st.title("GT Sistemas - Assistente ERP 🤖")
 
 # PASSO 1: SEMPRE VERIFICA DB
 db_path = "data/sample-lancedb/rag-table.lance"
