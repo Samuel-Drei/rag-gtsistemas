@@ -1,5 +1,37 @@
 # Base de Conhecimento — GT Sistemas ERP
 
+## Visão Geral do Sistema
+
+### O que é o GT Sistemas
+O GT Sistemas é um ERP (sistema de gestão) usado por pequenas e médias empresas para controlar vendas, compras, estoque, produtos, serviços e emissão de documentos fiscais eletrônicos. Ele é organizado em módulos acessados pelo menu lateral, como Produtos, Vendas, Compras, Ordem de Serviço, NFSe, PDV, Financeiro, Locação, Delivery/Marketplace, entre outros. O sistema também tem um painel de "SuperAdmin", usado pela equipe que administra o sistema (não pelo cliente final), para gerenciar empresas, planos, configurações globais e arquivos do servidor.
+
+### Quais documentos fiscais o sistema emite
+O GT Sistemas emite os principais documentos fiscais eletrônicos brasileiros: NF-e (Nota Fiscal Eletrônica, para venda de produtos/mercadorias), NFSe (Nota Fiscal de Serviço Eletrônica, para prestação de serviços), NFCe (Nota Fiscal de Consumidor Eletrônica, tipo cupom fiscal para venda direta ao consumidor final), CT-e (Conhecimento de Transporte Eletrônico) e MDF-e (Manifesto Eletrônico de Documentos Fiscais, usado no transporte de cargas).
+
+### Diferença entre nota de produto e nota de serviço
+Uma empresa que vende mercadoria (produto físico) emite NF-e; uma empresa que presta serviço (ex.: lavagem, manutenção, consultoria) emite NFSe. Muitas empresas emitem os dois tipos ao mesmo tempo — por exemplo, um lavajato que presta serviço de lavagem (NFSe) e também vende produtos de estética automotiva no balcão (NF-e). Cada tipo de nota tem seu próprio módulo, cadastros e regras fiscais dentro do sistema.
+
+### Diferença entre emitir uma nota e dar entrada em uma nota
+"Emitir" uma nota fiscal significa que a própria empresa é quem vende algo (produto ou serviço) para um cliente — ela gera o documento, assina com seu certificado digital e envia para a Receita. "Dar entrada" em uma nota é o processo inverso: quando um fornecedor vende algo para a empresa, é o fornecedor quem emite a nota, e a empresa apenas confirma o recebimento dela no sistema (por meio do Manifesto do Destinatário), para atualizar seu estoque e seu financeiro (contas a pagar).
+
+### O que é uma Ordem de Serviço
+Ordem de Serviço (OS) é o registro interno de um serviço a ser (ou já) prestado a um cliente, geralmente vinculado a um veículo ou item específico. É usada para organizar o atendimento antes de gerar a nota fiscal e o financeiro — por exemplo, uma OS de "Polimento" com o veículo do cliente, valor combinado e status de andamento. Depois de aprovada e finalizada, a OS pode ser convertida em faturamento (cobrança) e, idealmente, em uma nota fiscal de serviço.
+
+### O que é o PDV
+PDV (Ponto de Venda) é a tela de caixa do sistema, pensada para venda rápida de produtos no balcão: o operador busca o produto, adiciona no carrinho, escolhe a forma de pagamento e finaliza, gerando a nota fiscal correspondente automaticamente ao efetuar o pagamento.
+
+### O que é o Manifesto do Destinatário
+Manifesto do Destinatário é a funcionalidade que consulta diretamente na Receita Federal todas as notas fiscais emitidas por outras empresas contra o CNPJ do usuário (ou seja, tudo que foi comprado ou recebido). A partir dessa consulta, é possível dar "ciência" da existência da nota e depois completar sua entrada no sistema, dando baixa fiscal e (se configurado) atualizando o estoque.
+
+### O que é Natureza de Operação
+Natureza de Operação é a classificação de cada venda ou compra (ex.: "Venda de mercadoria", "Compra para revenda", "Compra para uso interno"). Ela é obrigatória para emitir qualquer nota fiscal e influencia diretamente o cálculo de impostos, por isso deve ser definida com orientação de um contador.
+
+### O que é CFOP, CST/CSOSN e NCM (em termos simples)
+CFOP é um código que identifica o tipo de operação fiscal (por exemplo, venda dentro do estado ou para outro estado). CST/CSOSN identifica como aquele produto é tributado pelo ICMS, variando conforme o regime tributário da empresa (Simples Nacional usa CSOSN; outros regimes usam CST). NCM é o código que classifica a mercadoria em si, conforme uma tabela nacional de produtos. Esses três códigos juntos, definidos no cadastro do produto, são obrigatórios para qualquer nota fiscal de mercadoria.
+
+### Ambiente de Produção x Homologação
+O sistema pode operar em dois ambientes: "Homologação" é o ambiente de teste da Receita, onde notas emitidas não têm validade fiscal real. "Produção" é o ambiente real — qualquer nota emitida e autorizada em Produção é um documento fiscal válido de verdade. É importante saber em qual ambiente o sistema está configurado antes de testar qualquer emissão de nota.
+
 ## Configuração Fiscal da Empresa (Emitente)
 
 ### Onde configurar os dados fiscais da empresa
