@@ -1,13 +1,3 @@
-# 📹 Playlist YouTube — Documentação GT Sistemas
-
-> **Playlist:** [Link](https://youtube.com/playlist?list=PLlKENpe5N_kKlM-HqhGuvp1jRyIE1V-Wv)  
-> **Total de vídeos:** 97  
-> **Vídeos com transcrição:** 97/97  
-> **Data de extração:** 2026-04-14  
-> **Canal:** GT Sistemas
-
----
-
 ## 1. NOVO ERP GT SISTEMAS LARAVEL 10
 
 **Tags:** Multiempresa, Multifilial, Laravel, PHP, NFe, NFCe, Cte, Automacao, sass |
