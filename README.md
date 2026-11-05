@@ -2,11 +2,27 @@
 
 RAG-based AI assistant that answers questions about the GT Sistemas ERP using retrieval, LLM reranking, and grounded response generation.
 
-The project was built to reduce support response time while keeping answers grounded in real documentation and troubleshooting cases.
+Built to help the sales team learn the ERP quickly and to cut support response time, keeping every answer grounded in real documentation and troubleshooting cases.
 
 **[Live Demo](https://gt-sistemas-rag.streamlit.app/)** · **[Repository](https://github.com/Samuel-Drei/rag-pipeline)**
 
+> The demo may take ~30s to wake up if it has been idle.
+
 ![Demo of the assistant](./app-demo.png)
+
+---
+
+## Usage
+
+In use at GT Sistemas since **June 2026**, daily by **4+ professionals**, mainly the sales team.
+
+| Before | After |
+|---|---|
+| 30–45 min waiting for a support answer | **1–2 min** |
+
+- 💬 **~560 questions** answered
+- 💸 **~$0.001–0.002** per question
+- 📚 Knowledge base: **97 tutorial videos** + troubleshooting knowledge from an existing support agent used in client implementations
 
 ---
 
@@ -17,7 +33,7 @@ The pipeline was optimized through controlled evaluation using a fixed benchmark
 | Metric | v1.0 | v2.0 | Result |
 |---|---:|---:|---:|
 | **Accuracy** | 96% (24/25) | 88% (22/25) | -8 pp |
-| **Average latency** | 15.8s | **5.2s** | **67% faster** |
+| **Average latency** | 15.8s | **5.2s** | **67% lower** (3× faster) |
 | **Maximum latency** | 25.0s | **10.6s** | **58% lower** |
 | **Token usage** | 100% | **33%** | **67% lower** |
 | **Latency standard deviation** | 4.47s | **2.46s** | **45% lower** |
@@ -37,7 +53,7 @@ This project explores a more controlled approach:
 The knowledge base combines:
 
 - **97 GT Sistemas tutorial videos** converted into searchable documentation.
-- **Real-world troubleshooting knowledge** containing ERP errors, root causes, and resolution procedures.
+- **Troubleshooting knowledge** from an existing support agent, containing ERP errors, root causes, and resolution procedures.
 
 This allows the assistant to answer both:
 
@@ -91,6 +107,30 @@ The core components are exposed through abstract interfaces, making the LLM, rer
 
 ---
 
+## Models
+
+Models run through the OpenAI API (nothing is hosted locally). Where each one is set:
+
+| Step | Model | File |
+|---|---|---|
+| Embeddings | `text-embedding-3-small` | `src/impl/datastore.py` |
+| Reranking | `gpt-4o-mini` | `src/impl/retriever.py` |
+| Response generation | `gpt-5-nano` | `src/util/invoke_ai.py` |
+
+The vector database is stored in `data/sample-lancedb/rag-table.lance`.
+
+### Cost per question (~$0.001–0.002)
+
+| Step | Approx. tokens (in / out) | Cost |
+|---|---|---:|
+| Query embedding | ~20 | ~$0 |
+| Reranking (5 chunks) | ~2,000 / ~15 | ~$0.0003 |
+| Answer generation | ~2,000 / ~1,000 (incl. reasoning) | ~$0.0005 |
+
+Estimated from OpenAI standard pricing; actual cost varies with chunk size.
+
+---
+
 ## Engineering Highlights
 
 - **Measured RAG optimization** instead of relying on subjective response quality.
@@ -130,14 +170,14 @@ Indexer
 LanceDB chunks
 ```
 
-A second source enriches the knowledge base with troubleshooting information extracted from real support cases.
+A second source enriches the knowledge base with troubleshooting information from an existing support agent already used in client implementations.
 
 The two sources complement each other:
 
 | Source | Purpose |
 |---|---|
 | 97 tutorial videos | How to use ERP modules |
-| Production troubleshooting | Errors, bugs, root causes, and fixes |
+| Support agent knowledge | Errors, bugs, root causes, and fixes |
 
 The extraction script for the original YouTube playlist is not part of this repository. The processed knowledge base is included as project data.
 
@@ -166,6 +206,7 @@ This makes it possible to compare pipeline changes using the same evaluation cri
 | Interface | Streamlit |
 | Language | Python |
 | Vector database | LanceDB |
+| Embeddings | OpenAI text-embedding-3-small |
 | Reranking | OpenAI GPT-4o-mini |
 | Response generation | OpenAI GPT-5-nano |
 | Data validation | Pydantic |
@@ -199,7 +240,7 @@ OPENAI_API_KEY=your_openai_api_key
 CO_API_KEY=your_cohere_api_key
 ```
 
-`OPENAI_API_KEY` is used by the current pipeline for embeddings, reranking, and generation. `CO_API_KEY` remains available for the alternative Cohere reranker implementation.
+`OPENAI_API_KEY` is used by the current pipeline for embeddings, reranking, and generation. `CO_API_KEY` remains available for the alternative Cohere reranker implementation. In production (Streamlit Cloud) the key is read from `st.secrets`.
 
 ### 3. Run the CLI
 
@@ -242,6 +283,8 @@ http://localhost:8501
 │   ├── interface/             # Abstract component contracts
 │   ├── impl/                  # Concrete implementations
 │   └── util/                  # Shared utilities
+├── data/
+│   └── sample-lancedb/        # Vector database (LanceDB)
 ├── sample_data/
 │   ├── source/                # Knowledge base
 │   └── eval/                  # Evaluation benchmark
@@ -257,6 +300,7 @@ http://localhost:8501
 
 - The current evaluation benchmark contains **25 questions**.
 - The optimized v2.0 configuration has lower accuracy than v1.0.
+- Usage numbers (questions answered, cost per question) are estimates, not tracked metrics.
 - The original YouTube extraction step is not included in the repository.
 - Continuous evaluation in CI is not implemented yet.
 - The knowledge base is currently specific to GT Sistemas.
@@ -266,10 +310,19 @@ http://localhost:8501
 ## Roadmap
 
 - [ ] Improve accuracy without sacrificing latency
+- [ ] Retrieve more candidates before reranking (currently 5)
 - [ ] Experiment with hybrid search
 - [ ] Improve chunking strategy
 - [ ] Cache embeddings
+- [ ] Track usage and cost per question
 - [ ] Add continuous evaluation to CI
+
+---
+
+## Author
+
+Built by **Samuel Teixeira** at iBrand Marketing / GT Tecnology.
+[LinkedIn](https://linkedin.com/in/samuel-andrei) · [GitHub](https://github.com/Samuel-Drei)
 
 ---
 
