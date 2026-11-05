@@ -307,24 +307,6 @@ http://localhost:8501
 
 ---
 
-## Roadmap
-
-- [ ] Improve accuracy without sacrificing latency
-- [ ] Retrieve more candidates before reranking (currently 5)
-- [ ] Experiment with hybrid search
-- [ ] Improve chunking strategy
-- [ ] Cache embeddings
-- [ ] Track usage and cost per question
-- [ ] Add continuous evaluation to CI
-
----
-
-## Author
-
-Built by **Samuel Teixeira** at iBrand Marketing / GT Tecnology.
-[LinkedIn](https://linkedin.com/in/samuel-andrei) · [GitHub](https://github.com/Samuel-Drei)
-
----
 
 ## License
 
