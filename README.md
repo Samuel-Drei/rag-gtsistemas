@@ -4,7 +4,7 @@ RAG-based AI assistant that answers questions about the GT Sistemas ERP using re
 
 Built to help the sales team learn the ERP quickly and to cut support response time, keeping every answer grounded in real documentation and troubleshooting cases.
 
-**[Live Demo](https://gtsistemas.streamlit.app/)** · **[Repository](https://github.com/Samuel-Drei/rag-pipeline)**
+**[Live Demo](https://gtsistemas.streamlit.app/)** 
 
 > The demo may take ~30s to wake up if it has been idle.
 
